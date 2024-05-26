@@ -24,9 +24,6 @@ export class UserDto {
 
   @IsString()
   department: string;
-
-  @IsString()
-  wish: string;
 }
 
 export class FeedbackDto {

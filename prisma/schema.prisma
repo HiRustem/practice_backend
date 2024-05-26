@@ -18,10 +18,10 @@ model User {
   course String
   faculty String
   department String
-  wish String
   done Boolean
   date String
   feedback String[]
+  count Int
 }
 
 model Admin {
