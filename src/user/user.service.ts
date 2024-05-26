@@ -90,9 +90,16 @@ export class UserService {
       }
     })
 
+    if (!user) {
+      return {
+        status: false,
+        description: 'Вы еще не зарегистрировались на практику. Перейдите к форме регистрации или обратитесь к администратору',
+      }
+    }
+
     const newFeedbackArray = [...user.feedback, JSON.stringify(feedback)]
 
-    return await this.databaseService.user.update({
+    await this.databaseService.user.update({
       where: {
         email
       },
@@ -101,5 +108,10 @@ export class UserService {
         feedback: newFeedbackArray,
       }
     })
+
+    return {
+      status: true,
+      description: 'Ваш отзыв успешно отправлен',
+    }
   }
 }
