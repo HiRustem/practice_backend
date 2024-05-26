@@ -82,11 +82,11 @@ export class UserService {
   }
 
   async addFeedback(addFeedbackDto: AddFeedbackDto) {
-    const { userId, feedback } = addFeedbackDto
+    const { email, feedback } = addFeedbackDto
 
     const user = await this.databaseService.user.findUnique({
       where: {
-        id: userId
+        email
       }
     })
 
@@ -94,7 +94,7 @@ export class UserService {
 
     return await this.databaseService.user.update({
       where: {
-        id: userId
+        email
       },
 
       data: {

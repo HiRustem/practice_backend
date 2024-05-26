@@ -53,8 +53,8 @@ export class FeedbackDto {
 }
 
 export class AddFeedbackDto {
-  @IsNumber()
-  userId: number;
+  @IsString()
+  email: string;
 
   feedback: FeedbackDto;
 }
