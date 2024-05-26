@@ -1,10 +1,15 @@
-import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { AdminService } from "./admin.service";
-import { AdminDto, UpdateDateDto, UpdateStatusDto } from "../dto/admin.dto";
+import { AdminDto, AdminLoginDto, UpdateDateDto, UpdateStatusDto } from "../dto/admin.dto";
 
 @Controller('admin')
 export class AdminController {
   constructor( private readonly adminService: AdminService ) {}
+
+  @Get('login')
+  async login(@Query() adminLoginDto: AdminLoginDto) {
+    return await this.adminService.login(adminLoginDto)
+  }
 
   @UsePipes(new ValidationPipe)
   @Post('register')

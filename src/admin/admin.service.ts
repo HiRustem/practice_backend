@@ -1,10 +1,33 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
-import { AdminDto } from "../dto/admin.dto";
+import { AdminDto, AdminLoginDto } from "../dto/admin.dto";
 
 @Injectable()
 export class AdminService {
   constructor( private readonly databaseService: DatabaseService ) {}
+
+  async login(adminLoginDto: AdminLoginDto) {
+    const { username, password } = adminLoginDto
+
+    const findAdmin = await this.databaseService.admin.findFirst({
+      where: {
+        username,
+        password
+      }
+    })
+
+    if (!findAdmin) {
+      return {
+        status: false,
+        description: 'Введите корректные данные'
+      }
+    }
+
+    return {
+      status: true,
+      description: findAdmin.key
+    }
+  }
 
   //Регистрация (потом убрать)
   async create(adminDto: AdminDto) {

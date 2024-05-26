@@ -26,3 +26,11 @@ export class UpdateDateDto {
   @IsString()
   date: string;
 }
+
+export class AdminLoginDto {
+  @IsString()
+  username: string;
+
+  @IsString()
+  password: string;
+}
