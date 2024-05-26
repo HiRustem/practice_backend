@@ -29,6 +29,14 @@ export class AdminService {
     }
   }
 
+  async loginWithKey(key: number) {
+    return await this.databaseService.admin.findFirst({
+      where: {
+        key
+      }
+    })
+  }
+
   //Регистрация (потом убрать)
   async create(adminDto: AdminDto) {
     const key = Math.floor(Math.random() * 100000000)

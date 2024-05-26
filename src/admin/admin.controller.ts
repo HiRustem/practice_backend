@@ -11,6 +11,11 @@ export class AdminController {
     return await this.adminService.login(adminLoginDto)
   }
 
+  @Get('loginWithKey/:key')
+  async loginWithKey(@Param('key', ParseIntPipe) key: number) {
+    return await this.adminService.loginWithKey(key)
+  }
+
   @UsePipes(new ValidationPipe)
   @Post('register')
   async createAdmin(@Body() adminDto: AdminDto) {
