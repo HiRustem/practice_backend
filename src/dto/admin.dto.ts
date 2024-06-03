@@ -8,6 +8,36 @@ export class AdminDto {
   password: string;
 }
 
+export class GetUsersListDto {
+  @IsNumber()
+  skip: number;
+
+  @IsNumber()
+  take: number;
+}
+
+export class GetUsersByUniversityDto {
+  @IsNumber()
+  skip: number;
+
+  @IsNumber()
+  take: number;
+
+  @IsString()
+  university: string;
+}
+
+export class GetUsersByDepartmentDto {
+  @IsNumber()
+  skip: number;
+
+  @IsNumber()
+  take: number;
+
+  @IsString()
+  department: string;
+}
+
 export class UpdateStatusDto {
   @IsNumber()
   id: number;

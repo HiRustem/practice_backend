@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { AdminService } from "./admin.service";
-import { AdminDto, AdminLoginDto, UpdateDateDto, UpdateStatusDto } from "../dto/admin.dto";
+import { AdminDto, AdminLoginDto, GetUsersByDepartmentDto, GetUsersByUniversityDto, GetUsersListDto, UpdateDateDto, UpdateStatusDto } from "../dto/admin.dto";
 
 @Controller('admin')
 export class AdminController {
-  constructor( private readonly adminService: AdminService ) {}
+  constructor(private readonly adminService: AdminService) { }
 
   @Get('login')
   async login(@Query() adminLoginDto: AdminLoginDto) {
@@ -20,6 +20,11 @@ export class AdminController {
   @Post('register')
   async createAdmin(@Body() adminDto: AdminDto) {
     return await this.adminService.create(adminDto)
+  }
+
+  @Get('getUsersList')
+  async getUsersList(@Query() usersListDto: GetUsersListDto) {
+    return await this.adminService.getUsersList(usersListDto.skip, usersListDto.take)
   }
 
   @Get('getAll')
@@ -42,14 +47,18 @@ export class AdminController {
     return await this.adminService.deleteUserById(userId)
   }
 
-  @Get('getUsersByUniversity/:university')
-  async getUsersByUniversity(@Param('university') university: string) {
-    return await this.adminService.getUsersByUniversity(university)
+  @Get('getUsersByUniversity')
+  async getUsersByUniversity(@Query() getUsersByUniversityDto: GetUsersByUniversityDto) {
+    const { skip, take, university } = getUsersByUniversityDto
+
+    return await this.adminService.getUsersByUniversity(skip, take, university)
   }
 
-  @Get('getUsersByDepartment/:department')
-  async getUsersByDepartment(@Param('department') department: string) {
-    return await this.adminService.getUsersByDepartment(department)
+  @Get('getUsersByDepartment')
+  async getUsersByDepartment(@Query() getUsersByDepartmentDto: GetUsersByDepartmentDto) {
+    const { skip, take, department } = getUsersByDepartmentDto
+
+    return await this.adminService.getUsersByDepartment(skip, take, department)
   }
 
   @Get('getUsersByStatus/:status')

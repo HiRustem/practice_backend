@@ -4,7 +4,7 @@ import { AdminDto, AdminLoginDto } from "../dto/admin.dto";
 
 @Injectable()
 export class AdminService {
-  constructor( private readonly databaseService: DatabaseService ) {}
+  constructor(private readonly databaseService: DatabaseService) { }
 
   async login(adminLoginDto: AdminLoginDto) {
     const { username, password } = adminLoginDto
@@ -69,6 +69,14 @@ export class AdminService {
     })
   }
 
+  // Получить конкретное количество практикантов из любого места списка
+  async getUsersList(skip: number, take: number) {
+    return await this.databaseService.user.findMany({
+      skip,
+      take,
+    })
+  }
+
   // Получить полный список практикантов
   async getAll() {
     return await this.databaseService.user.findMany()
@@ -79,10 +87,12 @@ export class AdminService {
     return await this.databaseService.user.count()
   }
 
-  
+
   // Сортировка по учебному заведению
-  async getUsersByUniversity(university: string) {
+  async getUsersByUniversity(skip: number, take: number, university: string) {
     return await this.databaseService.user.findMany({
+      skip,
+      take,
       where: {
         university,
       }
@@ -90,8 +100,10 @@ export class AdminService {
   }
 
   // Сортировка по департаменту
-  async getUsersByDepartment(department: string) {
+  async getUsersByDepartment(skip: number, take: number, department: string) {
     return await this.databaseService.user.findMany({
+      skip,
+      take,
       where: {
         department
       }
