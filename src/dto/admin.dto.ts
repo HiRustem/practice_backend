@@ -1,9 +1,6 @@
 import { IsBoolean, IsNumber, IsString } from "class-validator";
 
 export class AdminDto {
-  @IsNumber()
-  id: number;
-
   @IsString()
   username: string;
 
