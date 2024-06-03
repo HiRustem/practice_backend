@@ -1,3 +1,4 @@
+import { ParseIntPipe } from "@nestjs/common";
 import { IsBoolean, IsNumber, IsString } from "class-validator";
 
 export class AdminDto {
@@ -9,30 +10,24 @@ export class AdminDto {
 }
 
 export class GetUsersListDto {
-  @IsNumber()
-  skip: number;
+  skip: string;
 
-  @IsNumber()
-  take: number;
+  take: string;
 }
 
 export class GetUsersByUniversityDto {
-  @IsNumber()
-  skip: number;
+  skip: string;
 
-  @IsNumber()
-  take: number;
+  take: string;
 
   @IsString()
   university: string;
 }
 
 export class GetUsersByDepartmentDto {
-  @IsNumber()
-  skip: number;
+  skip: string;
 
-  @IsNumber()
-  take: number;
+  take: string;
 
   @IsString()
   department: string;

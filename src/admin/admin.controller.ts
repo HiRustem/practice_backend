@@ -25,7 +25,9 @@ export class AdminController {
   @UsePipes(new ValidationPipe)
   @Get('getUsersList')
   async getUsersList(@Query() usersListDto: GetUsersListDto) {
-    return await this.adminService.getUsersList(usersListDto.skip, usersListDto.take)
+    const { skip, take } = usersListDto
+
+    return await this.adminService.getUsersList(parseInt(skip), parseInt(take))
   }
 
   @Get('getAll')
@@ -52,14 +54,14 @@ export class AdminController {
   async getUsersByUniversity(@Query() getUsersByUniversityDto: GetUsersByUniversityDto) {
     const { skip, take, university } = getUsersByUniversityDto
 
-    return await this.adminService.getUsersByUniversity(skip, take, university)
+    return await this.adminService.getUsersByUniversity(parseInt(skip), parseInt(take), university)
   }
 
   @Get('getUsersByDepartment')
   async getUsersByDepartment(@Query() getUsersByDepartmentDto: GetUsersByDepartmentDto) {
     const { skip, take, department } = getUsersByDepartmentDto
 
-    return await this.adminService.getUsersByDepartment(skip, take, department)
+    return await this.adminService.getUsersByDepartment(parseInt(skip), parseInt(take), department)
   }
 
   @Get('getUsersByStatus/:status')
