@@ -75,6 +75,8 @@ export class AdminService {
       skip,
       take,
     })
+      .then(result => { return result })
+      .catch(error => { return error })
   }
 
   // Получить полный список практикантов
