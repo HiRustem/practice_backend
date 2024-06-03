@@ -24,7 +24,8 @@ export class AdminController {
 
   @Get('getUsersList')
   async getUsersList(@Query() usersListDto: GetUsersListDto) {
-    return await this.adminService.getUsersList(usersListDto.skip, usersListDto.take)
+    // return await this.adminService.getUsersList(usersListDto.skip, usersListDto.take)
+    return true
   }
 
   @Get('getAll')
