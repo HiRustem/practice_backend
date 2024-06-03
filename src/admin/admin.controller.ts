@@ -22,6 +22,7 @@ export class AdminController {
     return await this.adminService.create(adminDto)
   }
 
+  @UsePipes(new ValidationPipe)
   @Get('getUsersList')
   async getUsersList(@Query() usersListDto: GetUsersListDto) {
     return await this.adminService.getUsersList(usersListDto.skip, usersListDto.take)
