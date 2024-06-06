@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { AdminDto, AdminLoginDto } from "../dto/admin.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class AdminService {
@@ -58,6 +59,14 @@ export class AdminService {
         id: userId
       }
     })
+  }
+
+  async getUserByName(name: string) {
+    return await this.databaseService.$queryRaw(
+      Prisma.sql`SELECT * FROM "User" WHERE username LIKE ${'%' + name + '%'}`
+    )
+    .then(result => { return result })
+    .catch(error => { return error })
   }
 
   // Удалить практиканта по id
