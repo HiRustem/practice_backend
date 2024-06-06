@@ -61,9 +61,10 @@ export class AdminService {
     })
   }
 
+  // Найти практиканта по name
   async getUserByName(name: string) {
     return await this.databaseService.$queryRaw(
-      Prisma.sql`SELECT * FROM "User" WHERE username LIKE ${'%' + name + '%'}`
+      Prisma.sql`SELECT * FROM "User" WHERE name LIKE ${'%' + name + '%'}`
     )
     .then(result => { return result })
     .catch(error => { return error })
