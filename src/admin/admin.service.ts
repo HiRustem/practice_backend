@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { AdminDto, AdminLoginDto } from "../dto/admin.dto";
+import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class AdminService {
@@ -60,6 +61,15 @@ export class AdminService {
     })
   }
 
+  // Найти практиканта по name
+  async getUserByName(name: string) {
+    return await this.databaseService.$queryRaw(
+      Prisma.sql`SELECT * FROM "User" WHERE name LIKE ${'%' + name + '%'}`
+    )
+    .then(result => { return result })
+    .catch(error => { return error })
+  }
+
   // Удалить практиканта по id
   async deleteUserById(userId: number) {
     return await this.databaseService.user.delete({
@@ -75,8 +85,6 @@ export class AdminService {
       skip,
       take,
     })
-      .then(result => { return result })
-      .catch(error => { return error })
   }
 
   // Получить полный список практикантов

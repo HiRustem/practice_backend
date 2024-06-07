@@ -50,6 +50,11 @@ export class AdminController {
     return await this.adminService.deleteUserById(userId)
   }
 
+  @Get('getUserByName/:name')
+  async getUserByName(@Param('name') userName: string) {
+    return await this.adminService.getUserByName(userName)
+  }
+
   @Get('getUsersByUniversity')
   async getUsersByUniversity(@Query() getUsersByUniversityDto: GetUsersByUniversityDto) {
     const { skip, take, university } = getUsersByUniversityDto
