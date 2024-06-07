@@ -24,6 +24,16 @@ model User {
   count Int
 }
 
+model Department {
+  id Int @id @default(autoincrement())
+  intern String
+  university String
+  mentor String
+  tasks String
+  recommendation String
+  additional String
+}
+
 model Admin {
   id Int @id @default(autoincrement())
   username String
