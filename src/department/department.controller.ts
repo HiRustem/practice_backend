@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { DepartmentService } from "./department.service";
-import { DepartmentFeedbackDto } from "src/dto/department.dto";
+import { DepartmentFeedbackDto } from "../dto/department.dto";
 
 @Controller('department')
 export class DepartmentController {

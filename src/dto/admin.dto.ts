@@ -1,4 +1,3 @@
-import { ParseIntPipe } from "@nestjs/common";
 import { IsBoolean, IsNumber, IsString } from "class-validator";
 
 export class AdminDto {
