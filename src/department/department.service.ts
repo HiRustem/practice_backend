@@ -11,4 +11,8 @@ export class DepartmentService {
             data: feedback
         })
     }
+
+    async getDepartmentsFeedbacks() {
+        return await this.databaseService.department.findMany()
+    }
 }
